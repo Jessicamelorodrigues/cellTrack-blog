@@ -10,7 +10,7 @@ window.CELLTRACK_POSTS = [
         "tag": "Publication",
         "title": "CellTrack's core technology is published in the Journal of Medicinal Chemistry",
         "summary": "The peer-reviewed paper describes how glycan-based oxidation and chelator conjugation enable stable ⁸⁹Zr labeling of living cells for long-term PET imaging.",
-        "cover": "blog-images/paper-figure.gif",
+        "cover": "paper image.gif",
         "author": "CellTrack Team",
         "link": "https://pubs.acs.org/doi/full/10.1021/acs.jmedchem.6c00538",
         "draft": true,
