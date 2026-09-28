@@ -1,0 +1,10 @@
+Options -Indexes
+
+# posts.js changes every time someone publishes in /admin/, so browsers and the
+# Hostinger CDN must always check for the newest version (a quick 304 when unchanged).
+<IfModule mod_headers.c>
+  <FilesMatch "^(posts\.js|blog\.js|index\.html|blog\.html|post\.html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header unset Expires
+  </FilesMatch>
+</IfModule>
