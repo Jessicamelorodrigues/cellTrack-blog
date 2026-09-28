@@ -1,39 +1,39 @@
-# Como postar no blog da CellTrack
+# Painel do blog da CellTrack
 
-O painel fica em `admin.html`. Ele abre com uma **tela de login**, e ninguém vê nem mexe em nada sem entrar.
-Existem duas formas de entrar:
+O painel fica em `seusite.com/admin/`. Ele funciona igual ao do Fofoca Real: login por e-mail e senha, e você convida quem mais pode postar.
 
-## 1. Pelo site no ar (GitHub)
+> O painel precisa de hospedagem com PHP (Hostinger). No GitHub Pages ele não abre.
 
-Serve para postar de qualquer computador, em `seusite.com/admin.html`.
+## Primeira vez (só uma vez)
 
-1. Preencha **Usuário/organização** e **Repositório** do GitHub do site.
-2. Cole o **token de acesso**. Ele é a "senha" e só funciona para quem tem permissão de escrita no repositório. Quem confere isso é o próprio GitHub.
-   Como criar: GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token** →
-   *Only select repositories* (só o repositório do site) → *Permissions → Contents: Read and write* → escolha uma validade.
-3. Marque **Manter conectado** só se o computador for seu.
-4. Clique em **Entrar**. Ao **Publicar**, o post vai para o repositório e o site atualiza em 1–2 minutos.
+1. Envie todos os arquivos do site para a hospedagem (em `public_html`, por exemplo).
+2. Abra `seusite.com/admin/`: aparece a tela **Criar sua conta**.
+3. Preencha nome, e-mail e senha. Você vira a **administradora principal**.
 
-Guarde o token como uma senha. Se ele vazar, apague o token no GitHub (na mesma tela onde foi criado) e gere outro.
+Faça isso logo depois de enviar os arquivos: essa tela some assim que a primeira conta é criada.
 
-## 2. Neste computador (pasta do site)
+## Convidar alguém
 
-1. Abra `admin.html` desta pasta no **Chrome** ou no **Edge**.
-2. Clique em **Abrir pasta do site** e escolha esta pasta (a que tem `index.html` e `posts.js`).
-3. Quando o navegador pedir permissão para editar os arquivos, clique em **Permitir**.
+**Usuários → Convidar pessoa** → e-mail → **Enviar convite**.
+A pessoa recebe um link (válido por 48h) para criar a própria senha. O link também aparece na tela; se o e-mail não chegar, copie e mande por WhatsApp.
 
-Os posts são gravados direto nos arquivos desta pasta (`posts.js` e `blog-images/`). O painel lembra a pasta até você clicar em **Sair**.
+- **Administrador**: só posta.
+- **Principal**: posta e gerencia usuários.
+
+Alguém esqueceu a senha? Em **Usuários**, clique em **Nova senha** ao lado da pessoa e mande o link.
 
 ## Escrever um post
 
 1. **+ Novo post**
-2. Preencha **Título**, **Resumo** (1–2 frases), **Data** e **Categoria**.
-3. **Imagem de capa** (opcional): fotos grandes são reduzidas automaticamente.
+2. **Título**, **Resumo** (1–2 frases), **Data**, **Categoria**.
+3. **Imagem de capa** (opcional). Fotos grandes são reduzidas automaticamente.
 4. **Texto**: use os botões (negrito, subtítulo, lista, citação, link, imagem).
-5. Confira a aba **Prévia**: ela mostra o post exatamente como fica no site.
+5. Confira a aba **Prévia**.
 6. **Publicar**, ou **Salvar rascunho** para deixar escondido.
 
-Para editar, clique no post na lista da esquerda. **Despublicar** tira do ar sem apagar. **Excluir post** apaga.
+Na lista de posts: **Editar**, **Ver** e **Excluir**.
 
-> Rascunhos não aparecem no blog, mas ficam dentro do arquivo `posts.js`, que é público.
-> Não escreva nada confidencial num rascunho.
+## Cuidados
+
+- Ao enviar uma nova versão do site para a hospedagem, **não substitua** `posts.js`, a pasta `blog-images/` nem a pasta `data/`. Elas guardam os posts e os usuários criados pelo painel.
+- Rascunhos não aparecem no blog, mas ficam no arquivo `posts.js`, que é público. Não escreva nada confidencial.

@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static marketing website for **CellTrack**, a UW-Madison spinout commercializing glycan-based ⁸⁹Zr radiolabeling for PET imaging of cell-therapy biodistribution. The homepage is [index.html](index.html); a blog lives alongside it (see below). Image assets sit in the repo root. There is no build step, package manager, framework, or test suite.
+A marketing website for **CellTrack**, a UW-Madison spinout commercializing glycan-based ⁸⁹Zr radiolabeling for PET imaging of cell-therapy biodistribution. The public site is static HTML ([index.html](index.html) + a blog, see below); only the blog admin panel in [admin/](admin/) is PHP. Image assets sit in the repo root. There is no build step, package manager, framework, or test suite.
 
 ## Developing
 
-- **Preview:** open [index.html](index.html) directly in a browser, or serve the folder (`python -m http.server`) and visit it. Changes are live on refresh — nothing to compile.
-- **Deploy:** committing to `main` is the release; there is no CI or bundler.
+- **Preview:** open [index.html](index.html) directly in a browser, or serve the folder and visit it. Changes are live on refresh — nothing to compile. The admin needs a PHP server (`php -S localhost:8000` from the repo root, then `/admin/`).
+- **Deploy:** the site is hosted on **Hostinger (PHP)**; upload the files there. GitHub only stores the code — GitHub Pages can't run the admin.
+- **Never overwrite live content on deploy:** once live, the server's `posts.js`, `blog-images/` and `data/` are written by the admin and are newer than the repo. When uploading code changes, skip those.
 
 ## Architecture notes
 
@@ -23,10 +24,15 @@ A static marketing website for **CellTrack**, a UW-Madison spinout commercializi
 
 ## Blog
 
-- **Data:** every post is an object in [posts.js](posts.js) (`window.CELLTRACK_POSTS`), body in Markdown inside a template literal. Post images live in `blog-images/`. `draft: true` hides a post unless the URL has `?preview`.
+- **Data:** every post is an object in [posts.js](posts.js): `window.CELLTRACK_POSTS = <JSON array>;`. Everything after the `=` must stay **valid JSON** because the PHP admin parses and rewrites it. Fields: `slug, date, tag, title, summary, cover, author, link, draft, body` (Markdown). Post images live in `blog-images/`. `draft: true` hides a post unless the URL has `?preview`. posts.js is public, drafts included, so nothing private goes in it.
 - **Pages:** [blog.html](blog.html) (list + tag filter), [post.html](post.html)`?p=<slug>` (single post, Markdown rendered with `marked` from cdnjs + Tailwind typography plugin). The homepage `#news` section shows the 3 newest posts and stays hidden while nothing is published; the Blog menu link is always shown.
 - **Shared code:** [blog.js](blog.js) (`window.CT`) holds the card and article renderers used by every page and by the admin preview — change markup there, not per page. Card cover images carry `no-scale` so `updateScales()` on the homepage leaves them alone.
-- **Admin:** [admin.html](admin.html) (Portuguese UI, `noindex`) edits `posts.js`. The panel stays hidden behind a login screen with two real access checks, and there are no passwords or secrets in the code (it's public once the repo is): (1) **GitHub** — a fine-grained token that GitHub itself must confirm has push access to the repo (kept in sessionStorage, or localStorage with "Manter conectado"); commits go through the Contents API; (2) **local folder** — the File System Access API (Chrome/Edge), where the browser asks for write permission; the handle is remembered in IndexedDB until "Sair". Saves re-read `posts.js` first and apply only the one change. It regenerates the whole file, so hand edits survive only as data (the header comment above `window.CELLTRACK_POSTS` is preserved).
+- **Admin ([admin/](admin/), PHP, Portuguese UI):** modeled on the Fofoca Real admin. E-mail + password login with per-IP lockout (5 tries / 15 min), CSRF on every form, session cookie httponly/SameSite=Lax.
+  - Users live in `data/users.json` (`owner` = can manage users, `admin` = posts only). First visit with no users → [instalar.php](admin/instalar.php) creates the owner; it disables itself once a user exists.
+  - [usuarios.php](admin/usuarios.php) (owner only): invite by e-mail (48h link to [verificar.php](admin/verificar.php), where the person sets name + password), resend, "Nova senha" (same link mechanism for forgotten passwords), promote/demote, remove. Invites use plain `mail()`; the link is always shown on screen too, since shared-hosting mail isn't guaranteed.
+  - [post.php](admin/post.php) edits one post; images go through `save_uploaded_image()` (MIME-checked, renamed, resized to 1600px with GD when available). [upload.php](admin/upload.php) handles images inserted in the text.
+  - All logic is in [admin/includes/functions.php](admin/includes/functions.php); markup helpers in `layout.php`; every protected page starts with `require includes/auth.php` (sets `$me`).
+  - `.htaccess` files deny web access to `data/` and `admin/includes/`, and block script execution in `blog-images/`. `data/*.json` is git-ignored.
 - nav/footer markup is duplicated in index/blog/post — update all three together.
 
 ## Content conventions
