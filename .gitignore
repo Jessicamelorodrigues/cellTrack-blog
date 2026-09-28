@@ -1,4 +1,0 @@
-# Created on the server by the admin panel; never commit them
-data/*.json
-data/*.tmp
-posts.js.*.tmp

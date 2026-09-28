@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painel do Blog | CellTrack</title>
+  <link rel="icon" type="image/png" href="../icon.png" />
+</head>
+<body>
+  <!-- Decap CMS: reads admin/config.yml. Login is handled by DecapBridge (see config.yml). -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Preview in the CellTrack look (same structure as post.html)
+    CMS.registerPreviewStyle('preview.css');
+
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmtDate = d => {
+      const [y, m, day] = String(d || '').slice(0, 10).split('-').map(Number);
+      if (!y || !m) return '';
+      return new Date(y, m - 1, day || 1).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    const PostPreview = createClass({
+      render() {
+        const entry = this.props.entry;
+        const get = k => entry.getIn(['data', k]);
+        const cover = get('cover');
+        const coverAsset = cover ? this.props.getAsset(cover) : null;
+        return h('div', { className: 'page' },
+          h('article', { className: 'card' },
+            h('header', {},
+              h('div', { className: 'pills' },
+                get('date') ? h('span', { className: 'pill pill-date' }, fmtDate(get('date'))) : null,
+                get('tag') ? h('span', { className: 'pill pill-tag' }, get('tag')) : null,
+                get('draft') ? h('span', { className: 'pill pill-draft' }, 'Draft') : null),
+              h('h1', {}, get('title') || 'Untitled post'),
+              get('summary') ? h('p', { className: 'summary' }, get('summary')) : null,
+              get('author') ? h('p', { className: 'author' }, 'By ', h('strong', {}, get('author'))) : null),
+            coverAsset ? h('div', { className: 'cover' }, h('img', { src: coverAsset.toString(), alt: '' })) : null,
+            h('div', { className: 'body' }, this.props.widgetFor('body')),
+            get('link') ? h('p', { className: 'more' }, h('a', { className: 'btn', href: get('link') }, 'Read the original →')) : null));
+      },
+    });
+    CMS.registerPreviewTemplate('posts', PostPreview);
+  </script>
+</body>
+</html>
