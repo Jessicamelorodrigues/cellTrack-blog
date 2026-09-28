@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CellTrack | See Your Cells</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #EBF5FB 0%, #F0F7FF 60%, #EBF8FF 100%);
+    }
+
+    .reinier-crop {
+      background-image: url('team.jpg');
+      background-position: 18% center;
+      background-size: 210%;
+    }
+    .victor-crop {
+      background-image: url('team.jpg');
+      background-position: 82% center;
+      background-size: 210%;
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: #29ABE2;
+      transition: width 0.2s;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Hero entrance animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-1 { animation: fadeInUp 0.7s 0.1s ease both; }
+    .hero-2 { animation: fadeInUp 0.7s 0.3s ease both; }
+    .hero-3 { animation: fadeInUp 0.7s 0.5s ease both; }
+    .hero-4 { animation: fadeInUp 0.7s 0.7s ease both; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.up {
+      transform: translateY(32px);
+    }
+    .reveal.left {
+      transform: translateX(-32px);
+    }
+    .reveal.right {
+      transform: translateX(32px);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body class="font-sans text-slate-800 antialiased">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#"><img src="logo.png" alt="CellTrack" class="h-9" /></a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#technology" class="nav-link hover:text-[#1B3A6B] transition-colors">Technology</a>
+        <a href="#why" class="nav-link hover:text-[#1B3A6B] transition-colors">Why CellTrack</a>
+        <a href="#team" class="nav-link hover:text-[#1B3A6B] transition-colors">Team</a>
+        <a href="blog.html" class="nav-link hover:text-[#1B3A6B] transition-colors">Blog</a>
+        <a href="#contact" class="bg-[#1B3A6B] text-white px-5 py-2 rounded-lg hover:bg-[#29ABE2] transition-colors">
+          Get in Touch
+        </a>
+      </div>
+      <a href="blog.html" class="md:hidden ml-auto mr-4 text-sm font-medium text-slate-600 hover:text-[#1B3A6B]">Blog</a>
+      <a href="#contact" class="md:hidden bg-[#1B3A6B] text-white text-sm px-4 py-2 rounded-lg hover:bg-[#29ABE2] transition-colors">
+        Contact
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-bg py-24 md:py-32 px-6 relative overflow-hidden">
+    <div id="hero-orb" style="position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(41,171,226,0.18) 0%,rgba(27,58,107,0.07) 55%,transparent 72%);top:50%;left:50%;transform:translate(-50%,-50%) scale(1);pointer-events:none;will-change:transform;"></div>
+    <img id="scroll-icon" src="icon.png" alt="" aria-hidden="true" style="position:absolute;right:-80px;top:50%;transform:translateY(-50%) rotate(0deg) scale(1);width:420px;opacity:0.1;pointer-events:none;will-change:transform;" />
+
+    <div class="max-w-4xl mx-auto text-center relative">
+      <div class="hero-1 inline-block bg-[#29ABE2]/15 text-[#1B3A6B] text-sm font-semibold px-4 py-1.5 rounded-full mb-8 tracking-wide">
+        Bringing Medical Imaging to Cell Therapy
+      </div>
+      <h1 class="hero-2 text-5xl md:text-6xl font-extrabold text-[#1B3A6B] leading-tight mb-6">
+        See Where Your<br class="hidden md:block" />
+        Cell Therapies Go
+      </h1>
+      <p class="hero-3 text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+        CellTrack enables non-invasive PET imaging of therapeutic cell biodistribution with
+        <strong class="text-[#1B3A6B]">100× greater sensitivity</strong> than existing methods —
+        cutting development time and cost in half.
+      </p>
+      <div class="hero-4 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="bg-[#1B3A6B] text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-[#29ABE2] transition-colors shadow-md">
+          Partner With Us
+        </a>
+        <a href="#technology" class="border-2 border-[#1B3A6B] text-[#1B3A6B] font-semibold px-8 py-3.5 rounded-lg hover:bg-[#1B3A6B] hover:text-white transition-colors">
+          Learn How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">The Challenge</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-5">
+          Cell therapies are powerful.<br />But we're flying blind.
+        </h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          After injecting therapeutic cells, physicians have no way to know where those cells go,
+          whether they reach the tumor, or if they're working. This lack of visibility costs
+          billions and years in failed clinical trials.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal up reveal-d1 bg-slate-50 rounded-2xl p-8 border border-slate-100">
+          <div class="text-4xl font-extrabold text-[#1B3A6B] mb-2">8 years</div>
+          <p class="text-slate-500 text-sm leading-relaxed">Average time to develop a cell therapy without real-time biodistribution tracking</p>
+        </div>
+        <div class="reveal up reveal-d2 bg-slate-50 rounded-2xl p-8 border border-slate-100">
+          <div class="text-4xl font-extrabold text-[#1B3A6B] mb-2">$300M</div>
+          <p class="text-slate-500 text-sm leading-relaxed">Average cost to develop a single cell therapy from preclinical to clinical</p>
+        </div>
+        <div class="reveal up reveal-d3 bg-slate-50 rounded-2xl p-8 border border-slate-100">
+          <div class="text-4xl font-extrabold text-[#1B3A6B] mb-2">109+</div>
+          <p class="text-slate-500 text-sm leading-relaxed">Cell therapy companies targeting solid tumors with no reliable biodistribution data</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section id="technology" class="py-20 px-6 bg-[#F0F7FF]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">Our Solution</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-5">
+          Glycan-Based Radiolabeling for PET Imaging
+        </h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          A proprietary three-step process that labels therapeutic cells with Zirconium-89 for
+          high-resolution, non-invasive PET imaging — without compromising cell viability or function.
+        </p>
+      </div>
+      <div class="reveal up reveal-d3 mt-2 mb-12 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm text-center group cursor-pointer relative overflow-hidden">
+        <img src="Picture6.png" alt="PET imaging of cell biodistribution" class="max-h-96 w-full mx-auto object-contain transition-opacity duration-300 group-hover:opacity-20" />
+        <div class="absolute inset-0 flex items-center justify-center p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div class="text-left max-w-2xl">
+            <p class="text-[#1B3A6B] font-semibold text-sm mb-2">Non-Human Primate PET/CT Imaging — 3D Reconstruction</p>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              These images show CellTrack-labeled cells being tracked inside a living primate using PET/CT — a technique that combines radioactive cell labeling with medical scanners to reveal exactly where cells travel after injection. The 3D reconstructions display the animal's body with labeled cells highlighted in color, captured at multiple time points. This is the closest we can get to confirming the technology works before moving into human clinical trials.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal left reveal-d1 bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+          <div class="w-11 h-11 bg-[#1B3A6B] rounded-xl flex items-center justify-center mb-6">
+            <span class="text-white font-bold">01</span>
+          </div>
+          <h3 class="text-lg font-bold text-[#1B3A6B] mb-3">Sialic Acid Oxidation</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Cell surface glycans are selectively oxidized, creating reactive sites on the cell membrane
+            without affecting viability or function.
+          </p>
+        </div>
+        <div class="reveal up reveal-d2 bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+          <div class="w-11 h-11 bg-[#1B3A6B] rounded-xl flex items-center justify-center mb-6">
+            <span class="text-white font-bold">02</span>
+          </div>
+          <h3 class="text-lg font-bold text-[#1B3A6B] mb-3">Chelator Conjugation</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            A chelator molecule is covalently bonded to the oxidized glycans, providing a stable
+            anchor for the radiotracer with zero dissociation.
+          </p>
+        </div>
+        <div class="reveal right reveal-d3 bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+          <div class="w-11 h-11 bg-[#1B3A6B] rounded-xl flex items-center justify-center mb-6">
+            <span class="text-white font-bold">03</span>
+          </div>
+          <h3 class="text-lg font-bold text-[#1B3A6B] mb-3">⁸⁹Zr Radiolabeling</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Zirconium-89 is chelated to the cell surface, enabling high-resolution PET imaging
+            for 7+ days with unmatched sensitivity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATION -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">Peer-Reviewed Research</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-4">The Science Behind CellTrack</h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Our core technology is published and peer-reviewed in the <em>Journal of Medicinal Chemistry</em>.
+        </p>
+      </div>
+      <div class="reveal up reveal-d2 bg-[#F0F7FF] rounded-2xl p-8 border border-slate-100 shadow-sm">
+        <img id="paper-img" src="paper image.gif" alt="Glycan-based cell radiolabeling process for PET imaging" class="w-full mx-auto rounded-xl mb-8 object-contain max-h-72" />
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p class="text-[#1B3A6B] font-semibold text-sm mb-1">Journal of Medicinal Chemistry · Clemons et al.</p>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-xl">
+              Glycan-based mild oxidation and chelator conjugation enables stable ⁸⁹Zr radiolabeling of living cells for high-sensitivity, long-term PET imaging of cell biodistribution in vivo.
+            </p>
+          </div>
+          <a href="https://pubs.acs.org/doi/full/10.1021/acs.jmedchem.6c00538"
+             target="_blank" rel="noopener noreferrer"
+             class="shrink-0 bg-[#1B3A6B] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#29ABE2] transition-colors text-sm whitespace-nowrap">
+            Read the Paper →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS & UPDATES -->
+  <section id="news" class="hidden py-20 px-6 bg-[#F0F7FF]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">Latest Updates</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-5">News &amp; Milestones</h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          Recent progress from the CellTrack team.
+        </p>
+      </div>
+      <!-- Cards are the 3 newest blog posts from posts.js — post through admin.html, don't edit this section. -->
+      <div id="news-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <div class="text-center mt-12">
+        <a href="blog.html" class="inline-block border-2 border-[#1B3A6B] text-[#1B3A6B] font-semibold px-8 py-3 rounded-lg hover:bg-[#1B3A6B] hover:text-white transition-colors">
+          View All Posts
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CELLTRACK -->
+  <section id="why" class="py-20 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">Why CellTrack</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-5">A Step Change in Performance</h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          CellTrack outperforms every existing cell labeling method on every key metric.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="reveal left reveal-d1 flex gap-5 p-6 rounded-2xl border border-slate-100 hover:border-[#29ABE2] hover:shadow-sm transition-all">
+          <div class="text-4xl font-extrabold text-[#29ABE2] leading-none min-w-fit">100×</div>
+          <div>
+            <h3 class="font-bold text-[#1B3A6B] mb-1">Greater Sensitivity</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">150 µCi per million cells vs. 3–30 µCi with competing methods. See what others simply cannot.</p>
+          </div>
+        </div>
+        <div class="reveal right reveal-d1 flex gap-5 p-6 rounded-2xl border border-slate-100 hover:border-[#29ABE2] hover:shadow-sm transition-all">
+          <div class="text-4xl font-extrabold text-[#29ABE2] leading-none min-w-fit">7d+</div>
+          <div>
+            <h3 class="font-bold text-[#1B3A6B] mb-1">Long-Term Tracking</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Covalent bonding means zero label dissociation. Track cells for over 7 days vs. 2 hours with FDG-based methods.</p>
+          </div>
+        </div>
+        <div class="reveal left reveal-d2 flex gap-5 p-6 rounded-2xl border border-slate-100 hover:border-[#29ABE2] hover:shadow-sm transition-all">
+          <div class="text-4xl font-extrabold text-[#29ABE2] leading-none min-w-fit">2×</div>
+          <div>
+            <h3 class="font-bold text-[#1B3A6B] mb-1">Faster Development</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Cut clinical trial timelines in half. Real-time biodistribution data accelerates go/no-go decisions.</p>
+          </div>
+        </div>
+        <div class="reveal right reveal-d2 flex gap-5 p-6 rounded-2xl border border-slate-100 hover:border-[#29ABE2] hover:shadow-sm transition-all">
+          <div class="text-4xl font-extrabold text-[#29ABE2] leading-none min-w-fit">✓</div>
+          <div>
+            <h3 class="font-bold text-[#1B3A6B] mb-1">Fully Biocompatible</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Cell viability and function are fully preserved throughout the labeling process — safe for preclinical and clinical use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="py-20 px-6 bg-[#F0F7FF]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">The Team</p>
+        <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-4">World-Class Science. Startup Drive.</h2>
+        <p class="reveal up reveal-d2 text-lg text-slate-600 max-w-xl mx-auto">
+          Built by leaders in medical physics, radiochemistry, and cell biology.
+        </p>
+      </div>
+
+      <div class="reveal up reveal-d1 rounded-2xl overflow-hidden mb-12 max-w-md mx-auto shadow-md">
+        <img src="team.jpg" alt="Reinier Hernandez and Victor Santoro Fernandes" class="w-full object-cover" />
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div class="reveal left reveal-d1 text-center p-6 rounded-2xl border border-slate-100 bg-white hover:border-[#29ABE2] transition-colors">
+          <a href="https://www.linkedin.com/in/victor-santoro-fernandes-7a740615b/" target="_blank" rel="noopener noreferrer">
+            <img src="vic.jpg" alt="Victor Santoro Fernandes" class="w-36 h-36 rounded-2xl mx-auto mb-4 object-cover object-center shadow-sm hover:opacity-80 transition-opacity cursor-pointer" />
+          </a>
+          <h3 class="font-bold text-[#1B3A6B] mb-0.5">Dr. Victor Santoro Fernandes</h3>
+          <p class="text-[#29ABE2] text-xs font-semibold mb-3">Founder & CEO</p>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            Ph.D. Medical Physics, UW-Madison. 10+ years in quantitative medical imaging.
+            Inaugural entrepreneurial postdoctoral fellow at UW-Madison.
+          </p>
+        </div>
+        <div class="reveal right reveal-d1 text-center p-6 rounded-2xl border border-slate-100 bg-white hover:border-[#29ABE2] transition-colors">
+          <a href="https://www.linkedin.com/in/reinierhernandez/" target="_blank" rel="noopener noreferrer">
+            <img src="rei.jpg" alt="Dr. Reinier Hernandez" class="w-36 h-36 rounded-2xl mx-auto mb-4 object-cover object-center shadow-sm hover:opacity-80 transition-opacity cursor-pointer" />
+          </a>
+          <h3 class="font-bold text-[#1B3A6B] mb-0.5">Dr. Reinier Hernandez</h3>
+          <p class="text-[#29ABE2] text-xs font-semibold mb-3">Founder & Chief Scientific Advisor</p>
+          <p class="text-slate-500 text-sm leading-relaxed">
+            World-renowned radiochemist and inventor of CellTrack's core technology.
+            Assistant Professor at UW-Madison and international thought leader in radiopharmaceutical development.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 px-6 bg-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="reveal up text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-3">Contact</p>
+      <h2 class="reveal up reveal-d1 text-3xl md:text-4xl font-bold text-[#1B3A6B] mb-5">Let's Talk</h2>
+      <p class="reveal up reveal-d2 text-lg text-slate-600 mb-10 leading-relaxed">
+        Whether you're a pharma company, CDMO, or investor — we'd love to connect.
+        Reach out to learn more about partnering with CellTrack.
+      </p>
+      <div class="reveal up reveal-d3">
+        <a href="mailto:contact@celltrackbio.com"
+           class="inline-block bg-[#1B3A6B] text-white font-semibold px-10 py-4 rounded-lg hover:bg-[#29ABE2] transition-colors text-lg shadow-md">
+          Get in Touch
+        </a>
+        <p class="mt-4 text-slate-400 text-sm">contact@celltrackbio.com · Madison, Wisconsin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-6 bg-[#F8FAFC] border-t border-slate-100">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <img src="logo.png" alt="CellTrack" class="h-7" />
+      <p class="text-slate-400 text-sm">© 2026 CellTrack. All rights reserved.</p>
+      <p class="text-slate-400 text-sm">Madison, Wisconsin</p>
+    </div>
+  </footer>
+
+  <script src="posts.js"></script>
+  <script src="blog.js"></script>
+  <script>
+    // News: the 3 newest blog posts; section + Blog nav link stay hidden while nothing is published
+    (function () {
+      const items = CT.posts.slice(0, 3);
+      if (!items.length) return;
+      document.getElementById('news-list').innerHTML = items.map((p, i) => CT.card(p, i)).join('');
+      document.getElementById('news').classList.remove('hidden');
+    })();
+  </script>
+
+  <script>
+    // Hero orb + icon scroll
+    const heroOrb = document.getElementById('hero-orb');
+    const scrollIcon = document.getElementById('scroll-icon');
+
+    // Reveal on scroll (one-shot)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Continuous scroll-driven scale
+    function applyScale(el, vh, min, max) {
+      const rect = el.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const dist = Math.abs(vh / 2 - center);
+      const proximity = Math.max(0, 1 - dist / (vh * 0.65));
+      const scale = (min + proximity * (max - min)).toFixed(3);
+      el.style.transform = `scale(${scale})`;
+      el.style.transition = 'transform 0.15s ease-out';
+    }
+
+    function updateScales() {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+
+      // Hero orb grows
+      heroOrb.style.transform = `translate(-50%, -50%) scale(${Math.min(1 + scrollY * 0.0018, 2.8)})`;
+
+      // Icon rotates + grows
+      scrollIcon.style.transform = `translateY(-50%) rotate(${scrollY * 0.06}deg) scale(${Math.min(1 + scrollY * 0.001, 1.5)})`;
+
+      // Big stat numbers (8 years, $300M, 109+)
+      document.querySelectorAll('.text-4xl.font-extrabold').forEach(el => {
+        const parent = el.closest('.reveal');
+        if (!parent || parent.classList.contains('visible')) applyScale(el, vh, 0.8, 1.15);
+      });
+
+      // Step icons (01 02 03)
+      document.querySelectorAll('.w-11.h-11.bg-\\[\\#1B3A6B\\]').forEach(el => {
+        const parent = el.closest('.reveal');
+        if (!parent || parent.classList.contains('visible')) applyScale(el, vh, 0.75, 1.2);
+      });
+
+      // Why CellTrack big metrics (100×, 7d+, etc.)
+      document.querySelectorAll('.text-4xl.font-extrabold.text-\\[\\#29ABE2\\]').forEach(el => {
+        const parent = el.closest('.reveal');
+        if (!parent || parent.classList.contains('visible')) applyScale(el, vh, 0.78, 1.18);
+      });
+
+      // Images (PET scan, paper, team photo — not logos/portraits)
+      document.querySelectorAll('section img:not([class*="w-36"]):not([class*="h-9"]):not([class*="h-7"]):not(.no-scale)').forEach(el => {
+        applyScale(el, vh, 0.93, 1.05);
+      });
+
+      // Paper image — more pronounced
+      const paperImg = document.getElementById('paper-img');
+      if (paperImg) applyScale(paperImg, vh, 0.88, 1.08);
+
+      // Team member portrait cards
+      document.querySelectorAll('.text-center.p-6.rounded-2xl').forEach(el => {
+        const parent = el.closest('.reveal');
+        if (!parent || parent.classList.contains('visible')) applyScale(el, vh, 0.95, 1.03);
+      });
+    }
+
+    window.addEventListener('scroll', updateScales, { passive: true });
+    updateScales();
+  </script>
+
+</body>
+</html>
