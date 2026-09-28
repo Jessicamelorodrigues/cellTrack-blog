@@ -75,7 +75,7 @@
   <!-- NAV -->
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#"><img src="logo.png" alt="CellTrack" class="h-9" /></a>
+      <a href="./"><img src="logo.png" alt="CellTrack" class="h-9" /></a>
       <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
         <a href="#technology" class="nav-link hover:text-[#1B3A6B] transition-colors">Technology</a>
         <a href="#why" class="nav-link hover:text-[#1B3A6B] transition-colors">Why CellTrack</a>
@@ -368,14 +368,15 @@
   <!-- FOOTER -->
   <footer class="py-8 px-6 bg-[#F8FAFC] border-t border-slate-100">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <img src="logo.png" alt="CellTrack" class="h-7" />
+      <a href="./"><img src="logo.png" alt="CellTrack" class="h-7" /></a>
       <p class="text-slate-400 text-sm">© 2026 CellTrack. All rights reserved.</p>
       <p class="text-slate-400 text-sm">Madison, Wisconsin</p>
     </div>
   </footer>
 
-  <script src="posts.js?v=2"></script>
-  <script src="blog.js?v=2"></script>
+  <!-- posts.js is fetched fresh on every visit: the host caches .js files for days, which would hide new posts -->
+  <script>document.write('<script src="posts.js?t=' + Date.now() + '"><\/script>');</script>
+  <script src="blog.js?v=3"></script>
   <script>
     // News: the 3 newest blog posts; section + Blog nav link stay hidden while nothing is published
     (function () {

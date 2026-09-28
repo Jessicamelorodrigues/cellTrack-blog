@@ -48,7 +48,7 @@ function admin_bar() {
     }; ?>
 <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center gap-3 flex-wrap">
-    <a href="index.php"><img src="../logo.png" alt="CellTrack" class="h-8"></a>
+    <a href="../" title="Ir para o site"><img src="../logo.png" alt="CellTrack" class="h-8"></a>
     <span class="text-sm font-bold text-[#1B3A6B] border-l border-slate-200 pl-3">Painel do Blog</span>
     <div class="ml-auto flex items-center gap-1 flex-wrap text-sm font-medium">
       <?php $link('index.php', 'Posts'); ?>
@@ -67,7 +67,7 @@ function auth_page_open($eyebrow, $title) { ?>
   <img src="../icon.png" alt="" aria-hidden="true" style="position:absolute;right:-90px;top:50%;transform:translateY(-50%);width:420px;opacity:0.08;pointer-events:none;">
   <div class="relative max-w-md mx-auto">
     <div class="text-center mb-8">
-      <img src="../logo.png" alt="CellTrack" class="h-10 mx-auto mb-6">
+      <a href="../" title="Ir para o site"><img src="../logo.png" alt="CellTrack" class="h-10 mx-auto mb-6"></a>
       <p class="text-[#29ABE2] text-xs font-bold uppercase tracking-widest mb-2"><?php e($eyebrow); ?></p>
       <h1 class="text-3xl font-extrabold text-[#1B3A6B]"><?php e($title); ?></h1>
     </div>
@@ -75,7 +75,7 @@ function auth_page_open($eyebrow, $title) { ?>
 <?php }
 function auth_page_close() { ?>
     </div>
-    <p class="text-center mt-8"><a href="../index.html" class="text-sm font-semibold text-[#29ABE2] hover:text-[#1B3A6B]">&larr; Voltar para o site</a></p>
+    <p class="text-center mt-8"><a href="../" class="text-sm font-semibold text-[#29ABE2] hover:text-[#1B3A6B]">&larr; Voltar para o site</a></p>
   </div>
 </div>
 <?php }
