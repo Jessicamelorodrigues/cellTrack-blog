@@ -9,7 +9,7 @@ A marketing website for **CellTrack**, a UW-Madison spinout commercializing glyc
 ## Developing
 
 - **Preview:** open [index.html](index.html) directly in a browser, or serve the folder and visit it. Changes are live on refresh — nothing to compile. The admin needs a PHP server (`php -S localhost:8000` from the repo root, then `/admin/`).
-- **Deploy:** the site is hosted on **Hostinger (PHP)**; upload the files there. GitHub only stores the code — GitHub Pages can't run the admin.
+- **Deploy:** the site is hosted on **Hostinger (PHP)**, on a subdomain of lummedigital.com.br (the user's agency site); upload the files to that subdomain's folder. GitHub only stores the code — GitHub Pages can't run the admin.
 - **Never overwrite live content on deploy:** once live, the server's `posts.js`, `blog-images/` and `data/` are written by the admin and are newer than the repo. When uploading code changes, skip those.
 
 ## Architecture notes
